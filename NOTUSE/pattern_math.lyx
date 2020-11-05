@@ -1,0 +1,243 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computing effective degrees of freedom (
+\begin_inset Formula $N_{ef}^{\star}$
+\end_inset
+
+) as a function of frequency
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+Bretherton et al.
+ (1998) gives
+\begin_inset Formula 
+\[
+N_{ef}^{\star}=\frac{\left(\sum\lambda_{i}\right)^{2}}{\left(\sum\lambda_{i}^{2}\right)}=\frac{\text{tr}\left(\mathbf{C}\right)^{2}}{\text{tr}\left(\mathbf{C}^{2}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ are the eigenvalues of the covariance matrix
+\begin_inset Formula 
+\[
+\mathbf{C}=\frac{1}{n-1}\mathbf{X}\mathbf{X}^{\top}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of times and 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ is the data matrix.
+ The 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ are also the squared singular values of the matrix of model output 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+, so that 
+\begin_inset Formula 
+\[
+\mathbf{X}=\mathbf{U}\Lambda^{\frac{1}{2}}\mathbf{V}^{\top}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{\Lambda}$
+\end_inset
+
+ is populated along its diagonal with the 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+.
+ Our goal is to compute a function 
+\begin_inset Formula 
+\[
+N_{ef}^{\star}\left(\nu\right)
+\]
+
+\end_inset
+
+that is a function of frequency, i.e.
+ what are the degrees of freedom as a function of time scale? 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+The component of 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ that varies at a single frequency 
+\begin_inset Formula $\nu$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{X}_{\nu}$
+\end_inset
+
+, can be isolated by considering only the components of the principal components
+ (the right singular vectors in the columns of 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+) at that frequency,
+\begin_inset Formula 
+\[
+\mathbf{X}_{\nu}=\mathbf{U}\Lambda^{\frac{1}{2}}\mathbf{V}_{\nu}^{\top}.
+\]
+
+\end_inset
+
+Our goal is to compute 
+\begin_inset Formula $N_{ef}^{\star}\left(\nu\right)$
+\end_inset
+
+ using the trace form of the definition.
+ The trace of a covariance matrix is equal to the sum of squared diagonal
+ elements of any diagonalizing basis.
+ Here we choose the EOF basis for the full 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+; we will project 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ at varying frequencies onto this basis and compute the squared weights
+ to get the trace.
+ The squared projection of 
+\begin_inset Formula $\mathbf{X}_{\nu}$
+\end_inset
+
+ is then 
+\begin_inset Formula 
+\[
+\lambda_{\nu\,i}=\lambda_{i}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}
+\]
+
+\end_inset
+
+where the latter term (
+\begin_inset Formula $\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}$
+\end_inset
+
+) can be obtained via a power spectral density estimate.
+ Note that the eigenvectors of 
+\begin_inset Formula $\mathbf{C}^{2}$
+\end_inset
+
+ are the same as for 
+\begin_inset Formula $\mathbf{C}$
+\end_inset
+
+ and the eigenvalues are the square.
+ Thus we arrive at
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset Formula 
+\[
+N_{ef}^{\star}\left(\nu\right)=\frac{\left(\sum\lambda_{i}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}\right)^{2}}{\sum\lambda_{i}^{2}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{4}}.
+\]
+
+\end_inset
+
+For a simple example, consider the case where the field is 2x1 with a global
+ mode with frequency .1 and a top-only mode with frequency .01...
+ 
+\end_layout
+
+\end_body
+\end_document

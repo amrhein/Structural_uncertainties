@@ -1,0 +1,91 @@
+%% LyX 2.2.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage[authoryear]{natbib}
+\usepackage{babel}
+\begin{document}
+\begin{align*}
+\mathbf{P} & =\left(\mathbf{I}-\mathbf{KH}\right)\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle \left(\mathbf{I}-\mathbf{KH}\right)^{\top}+\mathbf{K}\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle \mathbf{K}^{\top}
+\end{align*}
+
+\begin{doublespace}
+\[
+\mathbf{K}=\mathbf{L}\circ\mathbf{B}\mathbf{H}^{\top}\left[\mathbf{H}\left(\mathbf{L}\circ\mathbf{B}\right)\mathbf{H}^{\top}+\mathbf{R}\right]^{-1}
+\]
+\[
+\frac{\partial\text{tr}\left(\mathbf{P}\right)}{\partial\mathbf{L}}=0
+\]
+
+\end{doublespace}
+
+How can we see the effects of the different terms?
+
+\[
+\mathbf{K}=\mathbf{B}\mathbf{H}^{\top}\left[\mathbf{H}\mathbf{B}\mathbf{H}^{\top}+\mathbf{R}\right]^{-1}
+\]
+
+\[
+\mathbf{H}=\mathbf{I}
+\]
+
+\[
+\mathbf{R}=\mathbf{0}
+\]
+
+\begin{doublespace}
+\[
+\mathbf{K}_{great\,obs}=\mathbf{B}\mathbf{B}^{-1}
+\]
+When $\mathbf{B}$ is full-rank, 
+\[
+\mathbf{K}_{great\,obs}=\mathbf{I}
+\]
+\begin{align*}
+\mathbf{P} & =\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle 
+\end{align*}
+When $\mathbf{B}$ is null (for a mean field),
+\end{doublespace}
+
+\[
+\mathbf{K}_{great\,obs}=\mathbf{0}
+\]
+\begin{align*}
+\mathbf{P} & =\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle 
+\end{align*}
+When $\mathbf{B}$ is non-null rank-deficient: simplify further by
+saying $\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle =\sigma_{x}^{2}\mathbf{I}$
+and $\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle =\sigma_{n}^{2}\mathbf{I}$.
+Now
+\begin{align*}
+\mathbf{P} & =\sigma_{x}^{2}\left(\mathbf{I}-\mathbf{B}\mathbf{B}^{-1}\right)\left(\mathbf{I}-\mathbf{B}\mathbf{B}^{-1}\right)^{\top}+\sigma_{n}^{2}\mathbf{B}\mathbf{B}^{-1}\mathbf{B}\mathbf{B}^{-1}
+\end{align*}
+and
+\[
+\text{tr}\left(\mathbf{P}\right)=K\sigma_{x}^{2}+(1-K)\sigma_{n}^{2}
+\]
+where $\text{rank}\left(\mathbf{B}\right)=K$. This is something we
+can minimize by localizing the prior covariance to a certain rank!
+
+For more complex true covariance structures, the concern is not just
+the magnitude of the covariances, but how each of them projects onto
+the prior and noise covariances.
+
+\begin{doublespace}
+\begin{align*}
+\mathbf{B} & =\mathbf{U}\Lambda\mathbf{U}^{\top}\\
+\mathbf{B}\mathbf{B}^{-1} & =\mathbf{U}\Lambda\mathbf{U}^{\top}\mathbf{U}\Lambda^{-1}\mathbf{U}^{\top}\\
+ & =\mathbf{U}\mathbf{U}^{\top}
+\end{align*}
+\begin{align*}
+\mathbf{P} & =\left(\mathbf{I}-\mathbf{U}\mathbf{U}^{\top}\right)\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle \left(\mathbf{I}-\mathbf{\mathbf{U}\mathbf{U}^{\top}}\right)^{\top}+\mathbf{U}\mathbf{U}^{\top}\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle \mathbf{U}^{\top}\mathbf{U}
+\end{align*}
+\end{doublespace}
+
+\end{document}

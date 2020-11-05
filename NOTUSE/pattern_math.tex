@@ -1,0 +1,73 @@
+%% LyX 2.2.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage{mathptmx}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{amstext}
+\usepackage{setspace}
+\usepackage[authoryear]{natbib}
+\usepackage{babel}
+\begin{document}
+
+\title{Computing effective degrees of freedom ($N_{ef}^{\star}$) as a function
+of frequency}
+
+\maketitle
+\begin{singlespace}
+Bretherton et al. (1998) gives
+\[
+N_{ef}^{\star}=\frac{\left(\sum\lambda_{i}\right)^{2}}{\left(\sum\lambda_{i}^{2}\right)}=\frac{\text{tr}\left(\mathbf{C}\right)^{2}}{\text{tr}\left(\mathbf{C}^{2}\right)}
+\]
+where $\lambda_{i}$ are the eigenvalues of the covariance matrix
+\[
+\mathbf{C}=\frac{1}{n-1}\mathbf{X}\mathbf{X}^{\top}
+\]
+where $n$ is the number of times and $\mathbf{X}$ is the data matrix.
+The $\lambda_{i}$ are also the squared singular values of the matrix
+of model output $\mathbf{X}$, so that 
+\[
+\mathbf{X}=\mathbf{U}\Lambda^{\frac{1}{2}}\mathbf{V}^{\top}
+\]
+where $\mathbf{\Lambda}$ is populated along its diagonal with the
+$\lambda_{i}$. Our goal is to compute a function 
+\[
+N_{ef}^{\star}\left(\nu\right)
+\]
+that is a function of frequency, i.e. what are the degrees of freedom
+as a function of time scale? 
+
+The component of $\mathbf{X}$ that varies at a single frequency $\nu$,
+$\mathbf{X}_{\nu}$, can be isolated by considering only the components
+of the principal components (the right singular vectors in the columns
+of $\mathbf{V}$) at that frequency,
+\[
+\mathbf{X}_{\nu}=\mathbf{U}\Lambda^{\frac{1}{2}}\mathbf{V}_{\nu}^{\top}.
+\]
+Our goal is to compute $N_{ef}^{\star}\left(\nu\right)$ using the
+trace form of the definition. The trace of a covariance matrix is
+equal to the sum of squared diagonal elements of any diagonalizing
+basis. Here we choose the EOF basis for the full $\mathbf{X}$; we
+will project $\mathbf{X}$ at varying frequencies onto this basis
+and compute the squared weights to get the trace. The squared projection
+of $\mathbf{X}_{\nu}$ is then 
+\[
+\lambda_{\nu\,i}=\lambda_{i}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}
+\]
+where the latter term ($\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}$)
+can be obtained via a power spectral density estimate. Note that the
+eigenvectors of $\mathbf{C}^{2}$ are the same as for $\mathbf{C}$
+and the eigenvalues are the square. Thus we arrive at
+
+\[
+N_{ef}^{\star}\left(\nu\right)=\frac{\left(\sum\lambda_{i}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{2}\right)^{2}}{\sum\lambda_{i}^{2}\left|\hat{\mathbf{v}}_{i}\left(\nu\right)\right|^{4}}.
+\]
+For a simple example, consider the case where the field is 2x1 with
+a global mode with frequency .1 and a top-only mode with frequency
+.01... 
+\end{singlespace}
+
+\end{document}

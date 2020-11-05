@@ -1,0 +1,474 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Comparing origins of spatial pattern diversity
+\begin_inset Newline newline
+\end_inset
+
+ in climate models and data
+\end_layout
+
+\begin_layout Subsubsection*
+Motivation
+\end_layout
+
+\begin_layout Standard
+There exists a solution nullspace in the paleoclimate data assimilation
+ problem.
+ Part of it comes from sampling and noise (
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+).
+ Part of it comes because models used for reconstruction do not necessarily
+ providing the correct ``catalog'' of patterns (the spanning set of the
+ prior covariance 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+) with which to reconstruct past variability.
+ Here we investigate possible errors in estimates of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ used for paleoclimate data assimilation by considering the origins of its
+ dominant structures as a function of frequency and time period when it
+ is computed for various coupled climate models, modern-era instrumental
+ reanalyses, and paleoclimate data.
+ We evaluate the extent to which biases in climate variability pattern generatio
+n are responsible for the DA nullspace.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Main questions
+\end_layout
+
+\begin_layout Standard
+Which time scales and time periods are chiefly responsible for generating
+ the diversity of climate patterns in models and data? Are these time scales
+ and periods different? Can we attribute any differences to a possible lack
+ of internal variability in models at some time scales?
+\end_layout
+
+\begin_layout Subsubsection*
+
+\series bold
+Related questions
+\end_layout
+
+\begin_layout Standard
+Are ensembles drawn from short time intervals biased because they do not
+ sample longer-period variability? Is there segregation of patterns to certain
+ time scales? Do patterns of variability associated with one time scale
+ in a prior model end up representing the same time scale in the LMR, or
+ is there cross-pollination? 
+\end_layout
+
+\begin_layout Subsubsection*
+Initial approach
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+The Last Millennium Reanalysis (LMR) uses an offline ensemble Kalman filter
+ (EnKF) approach to adjust prior model fields 
+\begin_inset Formula $\mathbf{x}^{p}$
+\end_inset
+
+ in order to fit forward-simulated model proxy values to proxy data, 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+.
+ This adjustment occurs for each year via the Kalman update equation,
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}^{a}=\mathbf{x}^{p}+\mathbf{K}\left[\mathbf{y}-\mathbf{H}\left(\mathbf{x}^{p}\right)\right]\label{eq:update}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ is a matrix specifying a linear relationship between elements of the model
+ field, 
+\begin_inset Formula $\mathbf{x}^{p}$
+\end_inset
+
+, and the data, and
+\series bold
+ 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+
+\series default
+ is the Kalman gain matrix, 
+\begin_inset Formula 
+\[
+\mathbf{K}=\mathbf{B}\mathbf{H}^{\top}\left[\mathbf{H}\mathbf{B}\mathbf{H}^{\top}+\mathbf{R}\right]^{-1}
+\]
+
+\end_inset
+
+which contains the prior covariance, 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+, and the prior observational error covariance, 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+.
+ The goal of this operation is to generate an ensemble of analysis states,
+ 
+\begin_inset Formula $\mathbf{x}^{a}$
+\end_inset
+
+, used use to estimate the distribution of actual climate states, 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+ We have information about these states because we assume that they are
+ sampled by the data as
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}=\mathbf{H}\mathbf{x}+\mathbf{n}.\label{eq:data}
+\end{equation}
+
+\end_inset
+
+The complete representation of uncertainty is given by the posterior distributio
+n 
+\begin_inset Formula $\text{p}\left(\mathbf{x}|\mathbf{y}\right)$
+\end_inset
+
+, which is the joint distribution of the elements of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ given knowledge of 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{x}^{p}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{n}$
+\end_inset
+
+ are assumed Gaussian, then the uncertainty can be described by the posterior
+ covariance of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ about 
+\begin_inset Formula $\mathbf{x}^{a}$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{equation}
+\mathbf{P}=\left\langle \left(\mathbf{x}-\mathbf{x}^{a}\right)\left(\mathbf{x}-\mathbf{x}^{a}\right)^{\top}\right\rangle .\label{eq:postcov1}
+\end{equation}
+
+\end_inset
+
+Substiting Equation and expanding yields 
+\begin_inset Formula 
+\begin{align}
+\mathbf{P} & =\left\langle \left(\mathbf{x}-\mathbf{x}^{a}\right)\left(\mathbf{x}-\mathbf{x}^{a}\right)^{\top}\right\rangle \\
+ & =\left(\mathbf{I}-\mathbf{KH}\right)\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle \left(\mathbf{I}-\mathbf{KH}\right)^{\top}+\mathbf{K}\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle \mathbf{K}^{\top}
+\end{align}
+
+\end_inset
+
+The two terms reflect different origins of uncertainty.
+ The first is a weighted sum of the true covariance of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, and includes the nullspace uncertainty.
+ The nullspace is the set defined by 
+\begin_inset Formula 
+\[
+\text{Null}\left(\mathbf{K}\mathbf{H}\right)\equiv\left\{ \mathbf{x}:\mathbf{K}\mathbf{H}\mathbf{x}=0\right\} .
+\]
+
+\end_inset
+
+The second is the projection of observational errors onto the solution.
+ If one assumes that the prior choices of state and uncertainty error covariance
+s are correct, i.e.
+ 
+\begin_inset Formula $\mathbf{B}=\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle $
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{R}=\left\langle \mathbf{n}\mathbf{n}^{\top}\right\rangle $
+\end_inset
+
+, then this expression can be simplified using the matrix inversion lemma
+ (see e.g.
+ Burger et al.
+ 1998) to the Kalman posterior covariance,
+\begin_inset Formula 
+\[
+\mathbf{P}_{KP}=\left(\mathbf{I}-\mathbf{K}\mathbf{H}\right)\mathbf{B}.
+\]
+
+\end_inset
+
+This is the standard expression for the posterior uncertainty of the EnKF
+ solution.
+ In the Gaussian limit where prior covariance estimates are nearly true,
+ then the joint posterior probability 
+\begin_inset Formula $p\left(\mathbf{x}|\mathbf{y}\right)$
+\end_inset
+
+ is completely specified by the joint covariances specified in 
+\begin_inset Formula $\mathbf{P}_{KP}$
+\end_inset
+
+.
+ Here we relax the assumption 
+\begin_inset Formula $\mathbf{B}=\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle $
+\end_inset
+
+ in order to explore the consequences of reconstructing past climate using
+ biased prior covariance estimates.
+\end_layout
+
+\begin_layout Standard
+Define the eigenvector decompositions of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle $
+\end_inset
+
+ to be
+\begin_inset Formula 
+\begin{align*}
+\tilde{\mathbf{U}}\tilde{\mathbf{\Lambda}}\tilde{\mathbf{V}}^{\top} & =\mathbf{B}\\
+\mathbf{U}\mathbf{\Lambda}\mathbf{V}^{\top} & =\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle 
+\end{align*}
+
+\end_inset
+
+where we have used tildes to denote that 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ is an estimate of 
+\begin_inset Formula $\left\langle \mathbf{x}\mathbf{x}^{\top}\right\rangle $
+\end_inset
+
+.
+ Begin by considering limit cases of the nullspace uncertainty.
+ For perfect observations, we have 
+\begin_inset Formula $\mathbf{H}=\mathbf{I}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{R}=\mathbf{0}$
+\end_inset
+
+, such that 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{K}_{perfect} & =\mathbf{B}\mathbf{H}^{\top}\left[\mathbf{H}\mathbf{B}\mathbf{H}^{\top}+\mathbf{R}\right]^{-1}\\
+ & =\mathbf{B}\mathbf{B}^{-1}.
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ is full-rank, then the inverse of 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ exists and 
+\begin_inset Formula $\mathbf{K}_{perfect}=\mathbf{I}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ is not full-rank (as we might expect for ensemble methods), we can instead
+ use the pseudoinverse to find
+\begin_inset Formula 
+\begin{align*}
+\mathbf{K}_{perfect} & =\mathbf{B}\mathbf{B}^{-p}\\
+ & =\mathbf{U}\mathbf{U}^{\top}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Saying that there are errors in the prior covariance is equivalent to saying
+ that 
+\begin_inset Formula $\mathbf{B}$
+\end_inset
+
+ contains structures (e.g., eigenvectors, which are spatial patterns, possibly
+ multivariate) that 1.
+ are orthogonal to the true covariance, relative to the true state covariance,
+ are either missing or that are associated with incorrect variance.
+ In the presence of incomplete observations and noise, what are the amplitudes
+ and length scales of contributions to nullspace uncertainty due to model
+ errors (i.e., differences from the true climate)? 
+\end_layout
+
+\begin_layout Standard
+Approach: Look at the time scales and time periods most responsible for
+ generating ``meaningful'' pattern diversity (i.e., patterns whose projections
+ onto observations yield greater variance than observational error).
+ Possible metrics for pattern diversity include the covariance matrix rank,
+ the covariance trace, the Kullback-Leibler difference (a way to describe
+ the difference between spectral entropy between two distributions projected
+ into the same eigenvector space) and the effective rank (related to Kullback-Le
+ibler).
+\end_layout
+
+\begin_layout Standard
+Follow-up questions: Does pattern diversity originate from similar timescales
+ in models, reanalyses, and paleoclimate data? Preliminary question about
+ the data: what is the contribution to pattern diversity due to noise processes
+ that are autocorrelated in time but white in space?
+\end_layout
+
+\begin_layout Standard
+Questions about particular spatial patterns:
+\end_layout
+
+\begin_layout Standard
+An LMR question: What are the patterns 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+3.
+ In the limit of perfect obs, K is BB inv, and the nullspace error is (I-BBinv)x
+x(I-BBinv)
+\end_layout
+
+\begin_layout Plain Layout
+These contributions interact with one another.
+ Most notably, imperfect observations can exacerbate it's not just the catalog
+ of patterns in the prior that matters – it's also their weights (variance),
+ because observational noise amplitudes effectively provide a cutoff for
+ the kinds of patterns that will appear in DA reconstructions.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
